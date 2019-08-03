@@ -7,6 +7,7 @@ import com.mmall.pojo.User;
 import com.mmall.service.IUserService;
 import com.mmall.util.MD5Util;
 import com.mmall.util.RedisShardedPoolUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -106,7 +107,7 @@ public class UserServiceImpl implements IUserService {
 
 
     public ServerResponse<String> forgetResetPassword(String username,String passwordNew,String forgetToken){
-        if(org.apache.commons.lang3.StringUtils.isBlank(forgetToken)){
+        if(StringUtils.isBlank(forgetToken)){
             return ServerResponse.createByErrorMessage("参数错误,token需要传递");
         }
         ServerResponse validResponse = this.checkValid(username,Const.USERNAME);
